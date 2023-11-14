@@ -21,5 +21,11 @@ class Post(
     var content: String = content
         protected set
 
+    fun update(title: String, content: String, updatedBy: String) {
+        this.title = title
+        this.content = content
+        super.updatedBy(updatedBy)
+    }
+
 }
 
