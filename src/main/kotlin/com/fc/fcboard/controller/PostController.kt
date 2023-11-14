@@ -5,6 +5,8 @@ import com.fc.fcboard.controller.model.PostDetailRs
 import com.fc.fcboard.controller.model.PostSearchRq
 import com.fc.fcboard.controller.model.PostSummaryRs
 import com.fc.fcboard.controller.model.PostUpdateRq
+import com.fc.fcboard.controller.model.toDto
+import com.fc.fcboard.service.PostService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -18,11 +20,13 @@ import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 
 @RestController
-class PostController {
+class PostController (
+    private val postService: PostService,
+){
 
     @PostMapping("/posts")
     fun createPost(@RequestBody postCreateRq: PostCreateRq): Long {
-        return 1L
+        return postService.createPost(postCreateRq.toDto())
     }
 
     @PutMapping("/posts/{id}")
